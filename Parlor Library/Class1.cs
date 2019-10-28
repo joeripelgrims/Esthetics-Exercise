@@ -4,24 +4,36 @@ using System.Text;
 
 namespace Parlor_Library
 {
-    abstract public class Person
+    public abstract class Person // This abstract class can't be instantiated directly.
     {
         public string Name { get; set; }
         public string EmailAddress { get; set; }
         public string TelephoneNumber { get; set; }
+        public abstract string Contact(); // This method will require implementation on all subclasses, unlike an interface.
+        public virtual string Card() // Example of a virtual method that we can optionally use in subclasses.
+        {
+            var sb = new StringBuilder();
+            var timeStamp = string.Format("Sent on {0:D} at {0:t}", DateTime.Now);
+            sb.AppendLine(timeStamp);
+            sb.AppendLine("1");
+            sb.AppendLine(Name);
+            sb.AppendLine(EmailAddress);
+            sb.AppendLine(TelephoneNumber);
+            return sb.ToString();
+        }
 
     }
     public class Customer : Person
     {
         static public List<string> customers = new List<string>() { "Joeri Pelgrims", "Joey Pelgrims", "Monique Reynders", "Marcel Pelgrims", "Jose Pelgrims" };
         public string Appointment { get; set; }
-        static public void addCustomer()
+        static public void AddCustomer()
         {
             Console.Clear();
             Console.WriteLine("Adding a new customer. Please write the full name:");
             customers.Add(Console.ReadLine());
         }
-        static public void showCustomerList()
+        static public void ShowCustomerList()
         {
             Console.Clear();
             Console.WriteLine("Customer list:");
@@ -33,23 +45,28 @@ namespace Parlor_Library
                 i++;
             }
         }
-        static public void removeCustomer()
+        static public void RemoveCustomer()
         {
             Console.Clear();
             Console.WriteLine("Removing a customer. Please select who to remove:");
-            Customer.showCustomerList();
+            Customer.ShowCustomerList();
             customers.RemoveAt(int.Parse(Console.ReadLine()) - 1);
         }
-        // Print a list of customers in order.
+        public override string Contact() // Example of overridden mandatory abstract class.
+        {
+            return "bananas";
+        }
+        public override string Card() // Example of overridden optional virtual class.
+        {
+            var original = base.Card();
+            var sb = new StringBuilder(original);
+            sb.AppendLine("This is a confidential message.");
+            return sb.ToString();
+        }
 
-        // TO DO:
-        // static public void editCustomer() { }
-        // Edit the email, phone number or name of a customer.
-        // static public void showCustomerDetails() { }
-        // Show the email, phone number and name of a customer.
-        // static public void removeCustomer() { }
-        // Remove a customer from the database.
-        /*public Customer()
+        /* TODO
+         
+        public Customer()
         {
             name = "Unnamed Customer";
             emailAddress = "someone@someplace.something";

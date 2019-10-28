@@ -26,15 +26,16 @@ namespace Parlor_program
                             switch (choiceM1)
                             {
                                 case 1:
-                                    Customer.showCustomerList();
+                                    //Customer.ShowCustomerList();
+                                    
                                     Console.WriteLine("Press Space to continue...");
                                     Console.ReadKey();
                                     break;
                                 case 2:
-                                    Customer.addCustomer();
+                                    Customer.AddCustomer();
                                     break;
                                 case 3:
-                                    Customer.removeCustomer();
+                                    Customer.RemoveCustomer();
                                     break;
                                 case 4:
                                     Console.WriteLine("Exit program.");
