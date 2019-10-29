@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Parlor_Library;
 
 namespace Parlor_program
@@ -26,8 +25,7 @@ namespace Parlor_program
                             switch (choiceM1)
                             {
                                 case 1:
-                                    //Customer.ShowCustomerList();
-                                    
+                                    Customer.ShowCustomerList();
                                     Console.WriteLine("Press Space to continue...");
                                     Console.ReadKey();
                                     break;
